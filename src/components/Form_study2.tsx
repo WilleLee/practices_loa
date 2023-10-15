@@ -11,7 +11,7 @@ import styled from "styled-components";
     }
 
 const Testform2 = () => {
-    const { register, handleSubmit, formState:{errors}} = useForm<FormValue>();
+    const { register, handleSubmit} = useForm<FormValue>();
 
     const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
         console.log(data)
