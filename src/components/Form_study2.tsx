@@ -24,32 +24,32 @@ const Testform2 = () => {
           <InputWrapper>
             <label>email</label>
             <Input 
-              {...register("email")} 
               type="email"
               placeholder="email"
               required
               minLength={4}
+              {...register("email")} 
             />
           </InputWrapper>
 
           <InputWrapper>
             <label>password</label>
             <Input 
-              {...register("password")} 
               type="password"
               placeholder="password"
               required
               minLength={8}
               maxLength={16}
+              {...register("password")} 
             />
           </InputWrapper>
 
-          <Textarea 
-            {...register("text")}
+          <Textarea
             placeholder="What's up?"
             rows={5}
             required
             maxLength={180}
+            {...register("text")}
           />
           <SubmitWrapper>
             <Submit type="submit" value={"SUBMIT"} />

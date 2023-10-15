@@ -1,61 +1,74 @@
-
-
-
-import { useForm, SubmitHandler} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 
-    interface FormValue {
-        email : string
-        password : string
-        text : string
-    }
+interface FormValue {
+  email: string;
+  password: string;
+  text: string;
+}
 
 const Testform = () => {
-    const { register, handleSubmit, formState:{errors}} = useForm<FormValue>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValue>();
 
-    const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
-        console.log(data)
-        alert(`email : ${data.email} \npassword : ${data.password} \ntext : ${data.text}`)
-    }
-    
-    return(
-        <>
-         <Wrapper onSubmit={handleSubmit(onSubmitHandler)}>
-          <InputWrapper>
-            <label>email</label>
-            <Input 
-              {...register("email", { required : "email을 입력하세요", pattern : /^\S+@\S+$/i})} 
-              type="email"
-              placeholder="email"
-            />
-            {errors.email?.message}
-          </InputWrapper>
-
-          <InputWrapper>
-            <label>password</label>
-            <Input 
-              type="password"
-              placeholder="password"
-              {...register("password", {required : "password를 입력하세요", minLength :{message : "8글자 이상 입력하세요", value : 8,}})} 
-            />
-            {errors.password?.message}
-          </InputWrapper>
-
-          <Textarea 
-            placeholder="What's up?"
-            rows={5}
-            {...register("text", { maxLength : {message : "글자가 180자를 초과하였습니다.", value :180,}})}
-          />
-            {errors.text?.message}
-          <SubmitWrapper>
-            <Submit type="submit" value={"SUBMIT"} />
-          </SubmitWrapper>
-        </Wrapper>
-      </>
+  const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
+    console.log(data);
+    alert(
+      `email : ${data.email} \npassword : ${data.password} \ntext : ${data.text}`,
     );
-}
-export default Testform;
+  };
 
+  return (
+    <>
+      <Wrapper onSubmit={handleSubmit(onSubmitHandler)}>
+        <InputWrapper>
+          <label>email</label>
+          <Input
+            type="email"
+            placeholder="email"
+            {...register("email", {
+              required: "email을 입력하세요",
+              pattern: /^\S+@\S+$/i,
+            })}
+          />
+          {errors.email?.message}
+        </InputWrapper>
+
+        <InputWrapper>
+          <label>password</label>
+          <Input
+            type="password"
+            placeholder="password"
+            {...register("password", {
+              required: "password를 입력하세요",
+              minLength: { message: "8글자 이상 입력하세요", value: 8 },
+            })}
+          />
+          {errors.password?.message}
+        </InputWrapper>
+
+        <Textarea
+          placeholder="What's up?"
+          rows={5}
+          {...register("text", {
+            maxLength: {
+              message: "글자가 180자를 초과하였습니다.",
+              value: 180,
+            },
+          })}
+        />
+        {errors.text?.message}
+        <SubmitWrapper>
+          <Submit type="submit" value={"SUBMIT"} />
+        </SubmitWrapper>
+      </Wrapper>
+    </>
+  );
+};
+export default Testform;
 
 const Wrapper = styled.form`
   margin: 20px auto;
