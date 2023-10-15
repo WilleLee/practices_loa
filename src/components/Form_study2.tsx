@@ -1,65 +1,63 @@
-
-
-
-import { useForm, SubmitHandler} from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 
-    interface FormValue {
-        email : string
-        password : string
-        text : string
-    }
+interface FormValue {
+  email: string;
+  password: string;
+  text: string;
+}
 
 const Testform2 = () => {
-    const { register, handleSubmit} = useForm<FormValue>();
+  const { register, handleSubmit } = useForm<FormValue>();
 
-    const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
-        console.log(data)
-        alert(`email : ${data.email} \npassword : ${data.password} \ntext : ${data.text}`)
-    }
-    
-    return(
-        <>
-         <Wrapper onSubmit={handleSubmit(onSubmitHandler)}>
-          <InputWrapper>
-            <label>email</label>
-            <Input 
-              type="email"
-              placeholder="email"
-              required
-              minLength={4}
-              {...register("email")} 
-            />
-          </InputWrapper>
-
-          <InputWrapper>
-            <label>password</label>
-            <Input 
-              type="password"
-              placeholder="password"
-              required
-              minLength={8}
-              maxLength={16}
-              {...register("password")} 
-            />
-          </InputWrapper>
-
-          <Textarea
-            placeholder="What's up?"
-            rows={5}
-            required
-            maxLength={180}
-            {...register("text")}
-          />
-          <SubmitWrapper>
-            <Submit type="submit" value={"SUBMIT"} />
-          </SubmitWrapper>
-        </Wrapper>
-      </>
+  const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
+    console.log(data);
+    alert(
+      `email : ${data.email} \npassword : ${data.password} \ntext : ${data.text}`,
     );
-}
-export default Testform2;
+  };
 
+  return (
+    <>
+      <Wrapper onSubmit={handleSubmit(onSubmitHandler)}>
+        <InputWrapper>
+          <label>email</label>
+          <Input
+            type="email"
+            placeholder="email"
+            required
+            minLength={4}
+            {...register("email")}
+          />
+        </InputWrapper>
+
+        <InputWrapper>
+          <label>password</label>
+          <Input
+            type="password"
+            placeholder="password"
+            required
+            minLength={8}
+            maxLength={16}
+            {...register("password")}
+          />
+        </InputWrapper>
+
+        <Textarea
+          placeholder="What's up?"
+          rows={5}
+          required
+          maxLength={180}
+          {...register("text")}
+        />
+        <SubmitWrapper>
+          <Submit type="submit" value={"SUBMIT"} />
+        </SubmitWrapper>
+      </Wrapper>
+    </>
+  );
+};
+export default Testform2;
 
 const Wrapper = styled.form`
   margin: 20px auto;
