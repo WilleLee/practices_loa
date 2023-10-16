@@ -1,18 +1,47 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import InputForm from "./Form_Input";
+import TextareaForm from "./Form_textarea";
 
 interface FormValue {
   email: string;
   password: string;
+  confirmPassword: string;
   text: string;
+  name?: string;
 }
 
+// 유효성 검사를 위해 yup 사용
 const Testform = () => {
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .required("email을 입력하세요.")
+      .email("email의 형식이 맞지 않습니다."),
+    password: yup
+      .string()
+      .required("password를 입력하세요.")
+      .min(8, "8글자 이상의 password를 입력하세요.")
+      .max(16, "16글자 이하의 password를 입력하세요."),
+    confirmPassword: yup
+      .string()
+      .required("password를 동일하게 입력하세요")
+      .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
+    text: yup.string().required().max(180, "글자가 180자를 초과하였습니다."),
+    name: yup.string(),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValue>();
+  } = useForm<FormValue>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    resolver: yupResolver(schema),
+  });
 
   const onSubmitHandler: SubmitHandler<FormValue> = (data) => {
     console.log(data);
@@ -24,43 +53,35 @@ const Testform = () => {
   return (
     <>
       <Wrapper onSubmit={handleSubmit(onSubmitHandler)}>
-        <InputWrapper>
-          <label>email</label>
-          <Input
-            type="email"
-            placeholder="email"
-            {...register("email", {
-              required: "email을 입력하세요",
-              pattern: /^\S+@\S+$/i,
-            })}
-          />
-          {errors.email?.message}
-        </InputWrapper>
-
-        <InputWrapper>
-          <label>password</label>
-          <Input
-            type="password"
-            placeholder="password"
-            {...register("password", {
-              required: "password를 입력하세요",
-              minLength: { message: "8글자 이상 입력하세요", value: 8 },
-            })}
-          />
-          {errors.password?.message}
-        </InputWrapper>
-
-        <Textarea
-          placeholder="What's up?"
-          rows={5}
-          {...register("text", {
-            maxLength: {
-              message: "글자가 180자를 초과하였습니다.",
-              value: 180,
-            },
-          })}
+        <InputForm
+          text={"email"}
+          name={"email"}
+          inputType={"email"}
+          errorMsg={errors.email?.message}
+          register={register}
         />
-        {errors.text?.message}
+
+        <InputForm
+          text={"password"}
+          name={"password"}
+          inputType={"password"}
+          errorMsg={errors.password?.message}
+          register={register}
+        />
+        <InputForm
+          text={"confirm password"}
+          name={"confirmPassword"}
+          inputType={"password"}
+          errorMsg={errors.confirmPassword?.message}
+          register={register}
+        />
+
+        <TextareaForm
+          name={"text"}
+          errorMsg={errors.text?.message}
+          register={register}
+        />
+
         <SubmitWrapper>
           <Submit type="submit" value={"SUBMIT"} />
         </SubmitWrapper>
@@ -82,30 +103,7 @@ const Wrapper = styled.form`
   flex-direction: column;
   gap: 4px;
 `;
-const InputWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  align-items: center;
-`;
-const Input = styled.input`
-  padding: 4px 6px;
-  border: 2px solid #595959;
-  border-radius: 5px;
-  caret-color: orange;
-  &:focus {
-    border-color: orange;
-  }
-`;
-const Textarea = styled.textarea`
-  padding: 4px 6px;
-  border: 2px solid #595959;
-  border-radius: 5px;
-  caret-color: orange;
-  &:focus {
-    border-color: orange;
-  }
-`;
+
 const SubmitWrapper = styled.div`
   width: 100%;
   display: flex;
