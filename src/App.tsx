@@ -1,12 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import Form from "./components/Form";
 import Testform from "./components/Form_study";
+import FormExample from "./components/FormExample";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
-  input, button, textarea, select, option, label {
+  input, button,  select, option, label {
     all: unset;
+  }
+  textarea {
+    resize: none;
+    outline: none;
   }
   body {
     background-color: #000;
@@ -23,7 +27,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Form />
+      <FormExample />
       <Testform />
     </>
   );
