@@ -46,7 +46,7 @@ const Testform4 = () => {
     formState: { errors },
   } = useForm<FormValue>({
     mode: "onSubmit",
-    reValidateMode: "onChange",
+    reValidateMode: "onSubmit",
     resolver: yupResolver(schema),
   });
 
