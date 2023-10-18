@@ -13,13 +13,12 @@ interface TypeProps {
   text: string;
   name: Path<FormValue>;
   inputType?: string;
-  register: UseFormRegister<FormValue>;
+  register: UseFormRegister<any>;
   errorMsg?: string;
 }
 
-const InputForm = (props: TypeProps) => {
+const InputForm4 = (props: TypeProps) => {
   console.log(props.text);
-  console.log(props.register);
 
   return (
     <>
@@ -38,7 +37,7 @@ const InputForm = (props: TypeProps) => {
   );
 };
 
-export default InputForm;
+export default InputForm4;
 
 const InputWrapper = styled.div`
   width: 100%;
