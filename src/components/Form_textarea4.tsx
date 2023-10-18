@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Path, UseFormRegister } from "react-hook-form";
+import { Path, UseFormRegisterReturn } from "react-hook-form";
 
 interface FormValue {
   email: string;
@@ -12,15 +12,16 @@ interface FormValue {
 interface TypeProps {
   name: Path<FormValue>;
   inputType?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegisterReturn;
   errorMsg?: string;
 }
 
-const TextareaForm4 = ({ name, register, errorMsg }: TypeProps) => {
+const TextareaForm4 = (props: TypeProps) => {
+  console.log(props.name);
   return (
     <>
-      <Textarea placeholder="What's up" rows={5} {...register(name)} />
-      {errorMsg && <span style={{ color: "red" }}>{errorMsg}</span>}
+      <Textarea placeholder="What's up" rows={5} {...props.register} />
+      {props.errorMsg && <span style={{ color: "red" }}>{props.errorMsg}</span>}
     </>
   );
 };

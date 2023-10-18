@@ -29,13 +29,12 @@ function App() {
     <>
       <GlobalStyles />
 
-      <FormExample />
+      {/* <FormExample />
       <Testform />
 
       <h1>hello world</h1>
-      <FormExample />
+      <FormExample /> */}
       <Testform4 />
-
     </>
   );
 }
