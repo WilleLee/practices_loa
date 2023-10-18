@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import Form from "./components/Form";
 import Testform4 from "./components/Form_study4";
+import FormExample from "./components/FormExample";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -23,7 +23,8 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Form />
+      <h1>hello world</h1>
+      <FormExample />
       <Testform4 />
     </>
   );
