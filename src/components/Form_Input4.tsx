@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Path, UseFormRegister } from "react-hook-form";
+import { Path, UseFormRegisterReturn } from "react-hook-form";
 
 interface FormValue {
   email: string;
@@ -13,12 +13,12 @@ interface TypeProps {
   text: string;
   name: Path<FormValue>;
   inputType?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegisterReturn;
   errorMsg?: string;
 }
 
 const InputForm4 = (props: TypeProps) => {
-  console.log(props.text);
+  console.log(props.name);
 
   return (
     <>
@@ -27,7 +27,7 @@ const InputForm4 = (props: TypeProps) => {
         <Input
           type={props.inputType}
           placeholder={props.text}
-          {...props.register(props.name)}
+          {...props.register}
         />
         {props.errorMsg && (
           <span style={{ color: "red", width: "500px" }}>{props.errorMsg}</span>

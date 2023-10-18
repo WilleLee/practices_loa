@@ -20,7 +20,7 @@ const Testform4 = () => {
       .string()
       .required("email을 입력하세요.")
       .matches(
-        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
         "이메일에 형식에 맞지 않습니다.",
       ),
     password: yup
@@ -66,7 +66,7 @@ const Testform4 = () => {
           name={"email"}
           inputType={"email"}
           errorMsg={errors.email?.message}
-          register={register}
+          register={register("email")}
         />
 
         <InputForm4
@@ -74,20 +74,20 @@ const Testform4 = () => {
           name={"password"}
           inputType={"password"}
           errorMsg={errors.password?.message}
-          register={register}
+          register={register("password")}
         />
         <InputForm4
           text={"confirm password"}
           name={"confirmPassword"}
           inputType={"password"}
           errorMsg={errors.confirmPassword?.message}
-          register={register}
+          register={register("confirmPassword")}
         />
 
         <TextareaForm4
           name={"text"}
           errorMsg={errors.text?.message}
-          register={register}
+          register={register("text")}
         />
 
         <SubmitWrapper>
