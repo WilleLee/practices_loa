@@ -2,9 +2,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import InputForm from "./Form_Input";
-import TextareaForm from "./Form_textarea";
-import { useRef } from "react";
+import InputForm4 from "./Form_Input4";
+import TextareaForm4 from "./Form_textarea4";
 
 interface FormValue {
   email: string;
@@ -15,14 +14,15 @@ interface FormValue {
 }
 
 // 유효성 검사를 위해 yup 사용
-const Testform = () => {
-  const emailFocus = useRef();
-
+const Testform4 = () => {
   const schema = yup.object().shape({
     email: yup
       .string()
       .required("email을 입력하세요.")
-      .email("email의 형식이 맞지 않습니다."),
+      .matches(
+        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+        "이메일에 형식에 맞지 않습니다.",
+      ),
     password: yup
       .string()
       .required("password를 입력하세요.")
@@ -32,16 +32,20 @@ const Testform = () => {
       .string()
       .required("password를 동일하게 입력하세요")
       .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다."),
-    text: yup.string().required().max(180, "글자가 180자를 초과하였습니다."),
+    text: yup
+      .string()
+      .required("글자를 입력해주세요.")
+      .max(180, "글자가 180자를 초과하였습니다."),
     name: yup.string(),
   });
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValue>({
-    mode: "onChange",
+    mode: "onSubmit",
     reValidateMode: "onChange",
     resolver: yupResolver(schema),
   });
@@ -51,28 +55,28 @@ const Testform = () => {
     alert(
       `email : ${data.email} \npassword : ${data.password} \ntext : ${data.text}`,
     );
+    reset();
   };
 
   return (
     <>
       <Wrapper onSubmit={handleSubmit(onSubmitHandler)}>
-        <InputForm
+        <InputForm4
           text={"email"}
           name={"email"}
           inputType={"email"}
           errorMsg={errors.email?.message}
           register={register}
-          ref1={emailFocus}
         />
 
-        <InputForm
+        <InputForm4
           text={"password"}
           name={"password"}
           inputType={"password"}
           errorMsg={errors.password?.message}
           register={register}
         />
-        <InputForm
+        <InputForm4
           text={"confirm password"}
           name={"confirmPassword"}
           inputType={"password"}
@@ -80,7 +84,7 @@ const Testform = () => {
           register={register}
         />
 
-        <TextareaForm
+        <TextareaForm4
           name={"text"}
           errorMsg={errors.text?.message}
           register={register}
@@ -93,7 +97,7 @@ const Testform = () => {
     </>
   );
 };
-export default Testform;
+export default Testform4;
 
 const Wrapper = styled.form`
   margin: 20px auto;
