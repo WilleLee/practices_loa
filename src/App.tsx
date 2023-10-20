@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./routes/HomePage";
+import CounterPage from "./routes/CounterPage";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/counter",
+    element: <CounterPage />,
   },
 ]);
 
