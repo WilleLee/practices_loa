@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import Testform4 from "./components/Form_study4";
-import FormExample from "./components/FormExample";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import HomePage from "./routes/HomePage";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -23,13 +23,18 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+]);
+
 function App() {
   return (
     <>
       <GlobalStyles />
-      <h1>hello world</h1>
-      <FormExample />
-      <Testform4 />f
+      <RouterProvider router={router} />
     </>
   );
 }
