@@ -1,0 +1,51 @@
+.wrapper {
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  > h1 {
+    font-size: 26px;
+    font-weight: 800;
+  }
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  > p {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    > span {
+      font-size: 20px;
+      font-weight: 800;
+    }
+  }
+}
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  > button {
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+    &:active,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+}
